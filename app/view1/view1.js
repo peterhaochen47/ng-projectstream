@@ -1,3 +1,4 @@
+/*
 'use strict';
 
 angular.module('myApp.view1', ['ngRoute'])
@@ -9,6 +10,7 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', [function() {
+.controller('View1Ctrl', [function($scope) {
+    //$scope.videoPlaying = 'M7lc1UVf-VE';
 
-}]);
+}]);*/
