@@ -16,33 +16,43 @@ function playWithFlow() {
     alert("You don't have any marks");
   } else {
         var indexCounter = 0;
-        var normal = false;
-        var once = false;
-        console.log("10 seconds after the like mark it will be:",(likemarks[indexCounter] + 10));
+
+        // set the first time mark
+        var currentMark = likemarks[indexCounter];
+        var nextMark = likemarks[indexCounter + 1];
+        var isSlowed = false;
 
         setInterval(function(){
                         var currentTime = player.getCurrentTime();
-                        if (!once && !normal && currentTime > likemarks[indexCounter]) {
-                            console.log("at this time we are setting to normal: "+currentTime);
-                            player.setPlaybackRate(1);
-                            normal = true;
 
-                        } else if (normal && currentTime > (likemarks[indexCounter] + 10)) {
-                            console.log("at this time we are setting to X2: "+currentTime);
-                            player.setPlaybackRate(2);
-                            normal = false;
-                            once = true;
+                        if (currentTime > nextMark) {
+                            indexCounter = indexCounter + 1;
+                            currentMark = likemarks[indexCounter]; // moves on to the next time mark
+                            nextMark = likemarks[indexCounter + 1];
                         }
-                      },100);
 
+                        // setting to X1
+                        if (currentTime > currentMark && !isSlowed) {
+                            console.log("set to x1 at: "+currentTime);
+                            player.setPlaybackRate(1);
+                            isSlowed = true;
 
+                           // setting to X2
+                        } else if (currentTime > currentMark + 10 && isSlowed) {
+                            console.log("set to x2 at: "+currentTime);
+                            player.setPlaybackRate(2);
+                            indexCounter = indexCounter + 1;
+                            currentMark = likemarks[indexCounter]; // moves on to the next time mark
+                            nextMark = likemarks[indexCounter + 1];
+                            isSlowed = false;
+                        }
+                      },200);
 
     }
 
 }
 
 $(window).load(function(){
-
 
     function embedYouTubeVideo() {
       player = new YT.Player('video', {
@@ -64,17 +74,7 @@ $(window).load(function(){
 
       embedYouTubeVideo();
 
-//     setInterval(function(){
-//        if (player.getCurrentTime() > 20) {
-//         player.setPlaybackRate(1);
-//       }
-//     }, 500);
-
 
     });
-
-
-
-
 
 });
