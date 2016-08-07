@@ -1,5 +1,8 @@
 var likemarks = [];
 var duration;
+var currentMark, nextMark;
+var indexCounter = 0;
+var isSlowed = false;
 // var time;
 
 function addOne() {
@@ -16,9 +19,7 @@ function playWithFlow() {
 
   // resetting the displayed marks
   document.getElementById("marks").innerHTML = '';
-  //document.getElementById("marksList").innerHTML = likemarks;
 
-  // resetting the like marks
   player.stopVideo();
   player.playVideo();
   player.setPlaybackRate(2);
@@ -28,42 +29,51 @@ function playWithFlow() {
   if (likemarks.length === 0) {
     alert("You don't have any marks");
   } else {
-        var indexCounter = 0;
+
+        indexCounter = 0;
+        isSlowed = false;
         // set the first time mark
-        var currentMark = likemarks[indexCounter];
-        var nextMark = likemarks[indexCounter + 1];
+        currentMark = likemarks[indexCounter];
+        nextMark = likemarks[indexCounter + 1];
         if (!nextMark) {nextMark = duration;}
-        var isSlowed = false;
+
 
         setInterval(function(){
-                        var currentTime = player.getCurrentTime();
+                   var currentTime = player.getCurrentTime();
 
-                        if (currentTime > nextMark) {
-                            indexCounter = indexCounter + 1;
-                            currentMark = likemarks[indexCounter]; // moves on to the next time mark
-                            nextMark = likemarks[indexCounter + 1];
-                            if (!nextMark) {nextMark = duration;}
-                            console.log('-----now updating marks------');
-                            console.log('new current mark = ', currentMark);
-                            console.log('new next mark = ', nextMark);
-                        }
+                   if (currentTime > nextMark) {
+                       indexCounter = indexCounter + 1;
+                       currentMark = likemarks[indexCounter]; // moves on to the next time mark
+                       if (!currentMark) {currentMark = duration;}
+                       nextMark = likemarks[indexCounter + 1];
+                       if (!nextMark) {nextMark = duration;}
+                       console.log('-----now updating marks------');
+                       console.log('new current mark = ', currentMark);
+                       console.log('new next mark = ', nextMark);
+                   }
 
-                        // setting to X1
-                        if (currentTime > currentMark && !isSlowed) {
-                            console.log("set to x1 at: "+currentTime + 'and current mark =' + currentMark);
-                            player.setPlaybackRate(1);
-                            isSlowed = true;
+                   // setting to X1
+                   if (currentTime > currentMark && !isSlowed) {
+                       console.log("set to x1 at: "+currentTime + 'and current mark =' + currentMark);
+                       player.setPlaybackRate(1);
+                       isSlowed = true;
 
-                           // setting to X2
-                        } else if (currentTime > currentMark + 10 && isSlowed) {
-                            console.log("set to x2 at: "+currentTime + 'and current mark =' + currentMark);
-                            player.setPlaybackRate(2);
-                            indexCounter = indexCounter + 1;
-                            currentMark = likemarks[indexCounter]; // moves on to the next time mark
-                            nextMark = likemarks[indexCounter + 1];
-                            isSlowed = false;
-                        }
-                      },200);
+                      // setting to X2
+                   } else if (currentTime > currentMark + 10 && isSlowed) {
+                       console.log("set to x2 at: "+currentTime + 'and current mark =' + currentMark);
+                       player.setPlaybackRate(2);
+                       indexCounter = indexCounter + 1;
+                       currentMark = likemarks[indexCounter]; // moves on to the next time mark
+                       if (!currentMark) {currentMark = duration;}
+                       nextMark = likemarks[indexCounter + 1];
+                       if (!nextMark) {nextMark = duration;}
+                       isSlowed = false;
+                       console.log('-----now updating marks------');
+                                              console.log('new current mark = ', currentMark);
+                                              console.log('new next mark = ', nextMark);
+                   }
+
+            },200);
     }
 }
 
