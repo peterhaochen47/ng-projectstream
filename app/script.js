@@ -1,9 +1,10 @@
+
+// book keeping variables
 var likemarks = [];
 var duration;
 var currentMark, nextMark;
 var indexCounter = 0;
 var isSlowed = false;
-// var time;
 
 function addOne() {
  var time = player.getCurrentTime();
@@ -12,12 +13,20 @@ function addOne() {
  document.getElementById("marksList").innerHTML = likemarks;
 }
 
+function moveOnToNextMark() {
+    indexCounter = indexCounter + 1;
+    currentMark = likemarks[indexCounter]; // moves on to the next time mark
+    if (!currentMark) {currentMark = duration;}
+    nextMark = likemarks[indexCounter + 1];
+    if (!nextMark) {nextMark = duration;}
+}
+
 function playWithFlow() {
 
   // sorting the new mark list
   likemarks.sort(function(a, b){return a - b});
 
-  // resetting the displayed marks
+  // resetting the displayed mark list
   document.getElementById("marks").innerHTML = '';
 
   player.stopVideo();
@@ -25,7 +34,7 @@ function playWithFlow() {
   player.setPlaybackRate(2);
 
   if (likemarks.length === 0) {
-    alert("You don't have any marks");
+    alert("You don't have any marks yet!");
   } else {
 
         // resetting all the variables
@@ -40,11 +49,7 @@ function playWithFlow() {
                    var currentTime = player.getCurrentTime();
 
                    if (currentTime > nextMark) {
-                       indexCounter = indexCounter + 1;
-                       currentMark = likemarks[indexCounter]; // moves on to the next time mark
-                       if (!currentMark) {currentMark = duration;}
-                       nextMark = likemarks[indexCounter + 1];
-                       if (!nextMark) {nextMark = duration;}
+                       moveOnToNextMark()
                    }
 
                    // setting to X1
@@ -53,15 +58,11 @@ function playWithFlow() {
                        player.setPlaybackRate(1);
                        isSlowed = true;
 
-                      // setting to X2
+                   // setting to X2
                    } else if (currentTime > currentMark + 10 && isSlowed) {
                        console.log("set to x2 at: "+currentTime + 'and current mark =' + currentMark);
                        player.setPlaybackRate(2);
-                       indexCounter = indexCounter + 1;
-                       currentMark = likemarks[indexCounter]; // moves on to the next time mark
-                       if (!currentMark) {currentMark = duration;}
-                       nextMark = likemarks[indexCounter + 1];
-                       if (!nextMark) {nextMark = duration;}
+                       moveOnToNextMark()
                        isSlowed = false;
                    }
 
