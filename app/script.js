@@ -24,15 +24,13 @@ function playWithFlow() {
   player.playVideo();
   player.setPlaybackRate(2);
 
-  console.log('the list looks like:', likemarks);
-
   if (likemarks.length === 0) {
     alert("You don't have any marks");
   } else {
 
+        // resetting all the variables
         indexCounter = 0;
         isSlowed = false;
-        // set the first time mark
         currentMark = likemarks[indexCounter];
         nextMark = likemarks[indexCounter + 1];
         if (!nextMark) {nextMark = duration;}
@@ -47,9 +45,6 @@ function playWithFlow() {
                        if (!currentMark) {currentMark = duration;}
                        nextMark = likemarks[indexCounter + 1];
                        if (!nextMark) {nextMark = duration;}
-                       console.log('-----now updating marks------');
-                       console.log('new current mark = ', currentMark);
-                       console.log('new next mark = ', nextMark);
                    }
 
                    // setting to X1
@@ -68,9 +63,6 @@ function playWithFlow() {
                        nextMark = likemarks[indexCounter + 1];
                        if (!nextMark) {nextMark = duration;}
                        isSlowed = false;
-                       console.log('-----now updating marks------');
-                                              console.log('new current mark = ', currentMark);
-                                              console.log('new next mark = ', nextMark);
                    }
 
             },200);
@@ -81,7 +73,7 @@ $(window).load(function(){
 
     function embedYouTubeVideo() {
       player = new YT.Player('video', {
-        videoId: 'M7lc1UVf-VE',
+        videoId: 'PfPdYYsEfAE',
         playerVars: {
           'autoplay': 1
         },
