@@ -6,6 +6,22 @@ var currentMark, nextMark;
 var indexCounter = 0;
 var isSlowed = false;
 
+function embedYouTubeVideo() {
+      player = new YT.Player('video', {
+        videoId: 'PfPdYYsEfAE',
+        playerVars: {
+          'autoplay': 1
+        },
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+}
+
+function onPlayerReady(event) {
+         duration = player.getDuration();
+    }
+
 function addOne() {
  var time = player.getCurrentTime();
  document.getElementById("marks").innerHTML = time;
@@ -70,23 +86,13 @@ function playWithFlow() {
     }
 }
 
+function loadVideo() {
+    var id = document.getElementById("videoId").value;
+    player.loadVideoById(id, 0, "large");
+    duration = player.getDuration();
+}
+
 $(window).load(function(){
-
-    function embedYouTubeVideo() {
-      player = new YT.Player('video', {
-        videoId: 'PfPdYYsEfAE',
-        playerVars: {
-          'autoplay': 1
-        },
-        events: {
-          'onReady': onPlayerReady
-        }
-      });
-    }
-
-    function onPlayerReady(event) {
-         duration = player.getDuration();
-    }
 
     $(function() {
 

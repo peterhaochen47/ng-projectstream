@@ -1,0 +1,23 @@
+body
+{
+  background-color: black;
+}
+
+.center-div
+{
+     margin: 0 auto;
+     width: 640px;
+}
+
+h1 {
+    color: white;
+}
+
+h4 {
+    color: white;
+}
+
+p {
+    color: white;
+}
+

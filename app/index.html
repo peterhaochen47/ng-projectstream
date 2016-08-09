@@ -3,19 +3,35 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.js"></script>
     <script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
     <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
 
-<h1>Peter and David's thing</h1></br>
+<h1 class="text-center">Stream</h1>
+<p class="text-center">"Time is but the stream I go a-fishing in." ---Henry David Thoreau</p>
 
-    <div id="video"></div>
-    <div><button onclick="addOne()">Like</button></div>
-    <div><button onclick="playWithFlow()">Play With Flow</button></div>
+  <div class="center-div">
 
-    <p>You set a mark at:</p>
-    <h1 id="marks"></h1>
-    <p>List of all your marks:</p>
-    <h4 id="marksList"></h4>
+      <p>Enter Video ID Here:</p>
+      <input type="text" class="form-control" id="videoId">
+      <button class="btn btn-default pull-right" onclick="loadVideo()">Load Video</button>
+
+      <div id="video"></div>
+      <div class="row">
+          <button class="btn btn-primary btn-lg pull-left" onclick="addOne()">Like</button>
+          <button class="btn btn-info btn-lg pull-right" onclick="playWithFlow()">Play With Flow</button>
+      </div>
+
+      <p>You set a mark at:</p>
+      <h1 id="marks"></h1>
+      <p>List of all your marks:</p>
+      <h4 id="marksList"></h4>
+
+  </div>
+
 
 </body>
 </html>
